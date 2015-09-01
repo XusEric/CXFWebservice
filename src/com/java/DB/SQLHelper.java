@@ -1,14 +1,17 @@
 package com.java.DB;
 
-import java.io.FileInputStream;  
-import java.io.IOException;  
-import java.io.InputStream;  
+//import java.io.FileInputStream;  
+//import java.io.IOException;  
+//import java.io.InputStream;  
 import java.sql.Connection;  
 import java.sql.DriverManager;  
 import java.sql.ResultSet;  
 import java.sql.SQLException;  
 import java.sql.Statement;  
-import java.util.Properties;  
+//import java.util.Properties;
+
+import com.java.util.ConfigHelper;
+
 import java.sql.*;  
 
 public class SQLHelper {
@@ -29,8 +32,8 @@ public class SQLHelper {
     private static String username = "";  
     private static String driver = "";  
     private static String passwd = "";
-    private static Properties  pp = null;  
-    private static InputStream fis = null;
+//    private static Properties  pp = null;  
+//    private static InputStream fis = null;
     
   //加载驱动，只需要一次，用静态代码块  
     static  
@@ -38,13 +41,13 @@ public class SQLHelper {
         try  
         {  
             //从dbinfo.properties  
-            pp = new Properties();  
-            fis=SQLHelper.class.getClassLoader().getResourceAsStream("dbinfo.properties");  
-            pp.load(fis);  
-            url = pp.getProperty("dbUrl");  
-            driver = pp.getProperty("dbDriver");  
-            username = pp.getProperty("dbUserName");  
-            passwd = pp.getProperty("dbPassword");  
+//            pp = new Properties();  
+//            fis=SQLHelper.class.getClassLoader().getResourceAsStream("dbinfo.properties");  
+//            pp.load(fis);  
+            url = ConfigHelper.getDbUrl();  
+            driver = ConfigHelper.getDbDriver();  
+            username = ConfigHelper.getDbUserName();  
+            passwd = ConfigHelper.getDbPassWord();  
              
             Class.forName(driver);  
         }  
@@ -54,10 +57,10 @@ public class SQLHelper {
         }  
         finally  
         {  
-            try  
-            { fis.close();}  
-            catch(IOException e) {e.printStackTrace();}  
-            fis = null;//垃圾回收站上收拾  
+//            try  
+//            { fis.close();}  
+//            catch(IOException e) {e.printStackTrace();}  
+//            fis = null;//垃圾回收站上收拾  
         }  
          
     }  

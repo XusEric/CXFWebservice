@@ -37,12 +37,9 @@ public class UserServiceImpl implements IUserService {
     }  
     
     public List<User> getUserList(@WebParam(name = "name") String name) {  
-//        User user = new User();  
-//        user.setId(new Date().getTime());  
-//        user.setName(name);  
-//        user.setAddress("china");  
-//        user.setEmail(name + "@test.com");  
-        ResultSet r=SQLHelper.executeQuery("select * from Test");
+    	String sql="select * from Test where name=?";
+    	String[] paramer=new String[]{name};
+        ResultSet r=SQLHelper.executeQuery(sql,paramer);
         List<User> u=toList(r,User.class);
         return u;  
     }  
